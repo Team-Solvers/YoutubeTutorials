@@ -1,41 +1,74 @@
 import {
-    getPlayList
+    getPlayListInfo
 } from "../utils/getPlaylistFromId.js"
+
+import {
+    getPlayListInfoWithID
+} from "../utils/getPlaylistFromId.js"
+
 import {
     getNextCard
 } from "../components/playlistNextCard.js"
 
 const playListSideBar = document.querySelector(".side-bar-list");
+const videoFrame = document.querySelector(".video-iframe");
 
 const playListURL = 'PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ';
 let thumbnail;
 let playListVideos = getVideos(playListURL);
+let videosInfo;
+let videosID;
 
 async function getVideos() {
-    let videos = await getPlayList(playListURL);
-    if (videos.length > 0) {
-        addVideosToCards(videos);
-        addStartingVideo(videos[0])
-    }    
-    return videos;
+    videosInfo = await getPlayListInfo(playListURL);
+    videosID = await getPlayListInfoWithID(playListURL);
+    if (videosInfo.length > 0) {
+        addVideosToCards(videosInfo,videosID);
+        addStartingVideo(videosInfo,videosID,0,false);
+        addEventLisnetToNextCards();
+    }        
+    return videosInfo;
 }
 
-function addVideosToCards(videos) {
-    videos.forEach(video => {
-        let videoId = video.id;        
+function addVideosToCards(videos,videosID) {
+    for(let i = 0;i < videos.length; i++){
+        let videoId = videosID[i].contentDetails.videoId;
+
+        //add a constructor for this;
+        let video = videos[i];               
         let snippetObj = video.snippet;
         let title = snippetObj.title;
         let channelTitle = snippetObj.channelTitle;
         let videoDescription = snippetObj.videoDescription;
         thumbnail = snippetObj.thumbnails.default;
-        let nextCard = getNextCard(title,channelTitle)
+        let nextCard = getNextCard(title,channelTitle,videoId,i);        
         playListSideBar.innerHTML += nextCard;
+    }
+}
+
+function addStartingVideo(videosInfo,videosID,index,shoulStart) {  
+    let videoId = videosID[index].contentDetails.videoId;
+    let video = videosInfo[index];  
+    let snippetObj = video.snippet;
+    let channelTitle = snippetObj.channelTitle;
+    let videoDescription = snippetObj.videoDescription;   
+    videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+
+    if(shoulStart){
+        videoFrame.click();
+    }
+}
+
+function addEventLisnetToNextCards(){
+    let nextCards = document.querySelectorAll(".next-card ");
+    nextCards.forEach(nextCard => {
+        nextCard.addEventListener('click',changeMainFrame);
     })
 }
 
-function addStartingVideo(video) {
-    let videoId = video.id;
-    let snippetObj = video.snippet;
-    let channelTitle = snippetObj.channelTitle;
-    let videoDescription = snippetObj.videoDescription;    
+function changeMainFrame(e){
+    let classes = e.target.classList;
+    if(classes.contains('next-card')){
+        addStartingVideo(videosInfo,videosID,classes[0],true);
+    }
 }

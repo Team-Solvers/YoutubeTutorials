@@ -1,5 +1,5 @@
-export function getNextCard(title,creator,videoId){
-    let card = `<div class="next-card ${videoId} mt-3">                    
+export function getNextCard(title,creator,videoId,index){
+    let card = `<div class="${index} next-card ${videoId} mb-3">                    
                     <i class="play-button fas fa-play-circle"></i>
                     <div class="next-video-description px-3">
                         <div class="next-video-title">
