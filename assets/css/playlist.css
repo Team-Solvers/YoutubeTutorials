@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root {
+    --slide-1: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500") ;
+    --opacity-1: 0.6
+}
 
 body {
     color: white;
@@ -55,6 +59,8 @@ body {
     height: 100%;
     width: 100%;
     border-radius: 10px;
+    background-image: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    background-size: cover;
 }
 
 .next-card {
@@ -73,11 +79,11 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    opacity: 0.4;
-    background-image: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    opacity: var(--opacity-1);
+    background-image: var(--slide-1); 
     background-repeat: no-repeat;
     background-position: 50% 0;
-    background-size: cover;
+    background-size: contain;
 }
 
 .next-video-description {
@@ -100,6 +106,10 @@ body {
     position: absolute;
     font-size: 40px;
     top: 30%;
-    left: 50%;
+    left: 50%;    
     transform: translateX(-50%);
+}
+
+.next-card:hover .play-button{
+    color: red;
 }

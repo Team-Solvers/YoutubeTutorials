@@ -10,8 +10,10 @@ import {
     getNextCard
 } from "../components/playlistNextCard.js"
 
+const root = document.documentElement;
 const playListSideBar = document.querySelector(".side-bar-list");
 const videoFrame = document.querySelector(".video-iframe");
+const nextCards = document.querySelector(".next-card");
 
 const playListURL = 'PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ';
 let thumbnail;
@@ -41,9 +43,14 @@ function addVideosToCards(videos,videosID) {
         let channelTitle = snippetObj.channelTitle;
         let videoDescription = snippetObj.videoDescription;
         thumbnail = snippetObj.thumbnails.default;
-        let nextCard = getNextCard(title,channelTitle,videoId,i);        
+        let nextCard = getNextCard(title,channelTitle,videoId,i);            
         playListSideBar.innerHTML += nextCard;
     }
+    
+    let url = thumbnail.url;
+    let styleProperty = `url(${url})`;
+    root.style.setProperty("--slide-1",styleProperty);
+    root.style.setProperty("--opacity-1",0.2);
 }
 
 function addStartingVideo(videosInfo,videosID,index,shoulStart) {  
