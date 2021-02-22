@@ -1,0 +1,31 @@
+.main{
+    background-color: rgb(65, 58, 58);
+}   
+
+.input-search-div{
+    padding: 10px 5px;
+    align-items: center; 
+    background-color: rgb(116, 106, 106)
+}
+
+.search-form{
+    max-width: 500px;    
+    margin: auto;
+    margin-top: 5px;
+}
+
+.search-input{
+    width: 400px;
+    padding: 10px;
+}
+
+.out-put-div{      
+    padding: 5%;   
+    max-width: 100%;
+    min-width: 100%;    
+    min-height: 100vh;
+}
+
+.card-contain{
+    margin-bottom: 10px;
+}
