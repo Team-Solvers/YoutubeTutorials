@@ -1,4 +1,3 @@
-/*  this is home page */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 body {
@@ -88,7 +87,6 @@ body a {
     background: #8d8787;
 }
 
-/* Main Header Styles */
 
 .main-header {
     position: absolute;
