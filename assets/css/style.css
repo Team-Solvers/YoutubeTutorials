@@ -1,11 +1,19 @@
+/* .main { */
+/* } */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+
+}
 .main{
-    background-color: rgb(65, 58, 58);
+    /* background-color: rgb(65, 58, 58); */
+    background-image: linear-gradient(rgba(216, 181, 181, 0.9), rgba(255, 232, 151, 0.9));
 }   
 
 .input-search-div{
     padding: 10px 5px;
     align-items: center; 
-    background-color: rgb(116, 106, 106)
+    background-color: rgb(230, 197, 197)
 }
 
 .search-form{
@@ -16,7 +24,7 @@
 
 .search-input{
     width: 400px;
-    padding: 10px;
+    padding: 1.5rem;
 }
 
 .out-put-div{      
@@ -28,4 +36,18 @@
 
 .card-contain{
     margin-bottom: 10px;
+}
+.search-icon {
+    font-size: 2rem;
+    background-color: linear-gradient(rgba(216, 181, 181, 0.9), rgba(255, 232, 151, 0.9));
+}
+
+.search-img .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.search-img .wrapper img {
+    height: 30vh;
 }
