@@ -32,3 +32,16 @@ export async function getPlayListInfoWithID(playListId) {
         return [];
     }       
 }
+
+
+export async function getSinglePlaylistInfo(playlistId){
+    try{        
+        let result = await fetch(URLS.singlePlayListInfo + playlistId);
+        let playlist = await result.json();
+        return playlist;
+    }   
+    catch(e){
+        console.log(e);
+    }
+    return [];
+}

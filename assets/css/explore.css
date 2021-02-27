@@ -1,0 +1,31 @@
+body {
+    padding: 0;
+}
+
+/* #MySlide{
+    width: auto ;
+    height: 00px;
+} */
+img {        
+    height: auto;
+}
+
+.spinner-container {
+    margin: auto;
+    width: 60%;        
+    margin-top: 15%;
+    color: orange;
+    text-align: center;
+}
+
+.carousel-inner {
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow: 3px 3px 5px 6px #ccc;
+    border-radius: 10px;
+}
+
+.carousel-caption h5 {
+    font-size: 4rem;
+}
+

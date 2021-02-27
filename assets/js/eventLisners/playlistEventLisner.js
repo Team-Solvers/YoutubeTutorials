@@ -10,20 +10,31 @@ import {
     getNextCard
 } from "../components/playlistNextCard.js"
 
+const urlParams = new URLSearchParams(window.location.search);
+const playlistId = urlParams.get('playlistId');
+const title = urlParams.get('title');
+const channel = urlParams.get('channel');
+
+const plTitle = document.querySelector('.pl-title');
+const contentCreator = document.querySelector('.content-creator');
+
+plTitle.innerText = title;
+contentCreator.innerText = channel;
+
 const root = document.documentElement;
 const playListSideBar = document.querySelector(".side-bar-list");
 const videoFrame = document.querySelector(".video-iframe");
 const nextCards = document.querySelector(".next-card");
 
-const playListURL = 'PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ';
 let thumbnail;
-let playListVideos = getVideos(playListURL);
 let videosInfo;
 let videosID;
 
+getVideos();
+
 async function getVideos() {
-    videosInfo = await getPlayListInfo(playListURL);
-    videosID = await getPlayListInfoWithID(playListURL);
+    videosInfo = await getPlayListInfo(playlistId);
+    videosID = await getPlayListInfoWithID(playlistId);
     if (videosInfo.length > 0) {
         addVideosToCards(videosInfo,videosID);
         addStartingVideo(videosInfo,videosID,0,false);
