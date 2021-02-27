@@ -1,22 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 :root {
-    --slide-1: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500") ;
+    --slide-1: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
     --opacity-1: 0.6
 }
 
 body {
-    color: white;
+    color: black;
     margin: 3rem;
-    background-color: #0B1019;
+    background-color: rgba(216, 181, 181, 0.9);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+
 }
 
 .pl-title {
     font-size: 3rem;
-
 }
 
 .content-creator {
@@ -26,7 +31,8 @@ body {
 .content-view {
     width: 100%;
     height: 70vh;
-    display: flex;
+    /* display: flex; */
+    margin-top: 10rem;
 }
 
 .current-video-container {
@@ -80,7 +86,7 @@ body {
     height: 100%;
     z-index: 1;
     opacity: var(--opacity-1);
-    background-image: var(--slide-1); 
+    background-image: var(--slide-1);
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: contain;
@@ -106,10 +112,13 @@ body {
     position: absolute;
     font-size: 40px;
     top: 30%;
-    left: 50%;    
+    left: 50%;
     transform: translateX(-50%);
 }
 
-.next-card:hover .play-button{
+.next-card:hover .play-button {
     color: red;
 }
+
+
+
