@@ -5,7 +5,7 @@ const URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=$
 const searchForm = document.querySelector(".search-form");
 const queryInput = document.querySelector(".search-input");
 const outPutDiv = document.querySelector(".out-put-div");
-const searchBtn = document.querySelector(".btn-search");
+const searchBtn = document.querySelector(".search-icon");
 
 searchBtn.addEventListener('click',getVideosFromApi);
 
