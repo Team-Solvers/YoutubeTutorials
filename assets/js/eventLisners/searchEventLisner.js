@@ -1,56 +1,78 @@
-import {Video} from "../models/video.js"
-import {Playlist} from "../models/playlist.js"
-import {URLS as queryURLS} from "../utils/queries.js"
-import {getVideoCard2} from "../components/videoCard.js"
+import {
+    Video
+} from "../models/video.js"
+import {
+    Playlist
+} from "../models/playlist.js"
+import {
+    URLS as queryURLS
+} from "../utils/queries.js"
+import {
+    getVideoCard2
+} from "../components/videoCard.js"
 
 const URL = queryURLS.searchVideo;
 const PLURL = queryURLS.searchPlaylist;
 
+const undraw = document.querySelector('.search-img');
+const container = document.querySelector('.results')
+
 const searchForm = document.querySelector(".search-form");
 const queryInput = document.querySelector(".search-input");
 const outPutDiv = document.querySelector(".out-put-div");
-const searchBtn = document.querySelector(".search-form");
+const searchBtn = document.querySelector(".search-icon");
 var radios = document.querySelectorAll('.cat-check');
+
+const loader = `
+<div class="spinner-container">
+    <div class="spinner-border" style="width: 7rem; height: 7rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+</div>     `;
 
 let videos;
 searchForm.addEventListener('submit', getSearchResult);
+searchBtn.addEventListener('click', getSearchResult);
 
 
-function getSearchResult(e){
+function getSearchResult(e) {
     e.preventDefault();
+    undraw.style.display = "hidden";
+
+
+    container.style.display = "block";
     let query = queryInput.value;
     if (query === "") {
         queryInput.style.border = "2px solid red";
         return
     }
 
-    queryInput.style.border = "";    
-    let searchType = getRadioValue();        
-    if(searchType == "option1"){
+    outPutDiv.innerHTML = loader;
+    queryInput.style.border = "";
+    let searchType = getRadioValue();
+    if (searchType == "option1") {
         getPlaylistFromApi(query);
-    }
-    else {
+    } else {
         getVideosFromApi(query);
-    }    
+    }
 }
 
-async function getPlaylistFromApi(query){    
-        
-    outPutDiv.innerHTML = "";
+async function getPlaylistFromApi(query) {
     let queryUrl = PLURL + query;
     let result = await fetch(queryUrl);
-    result = await result.json();    
+    result = await result.json();
+    outPutDiv.innerHTML = "";
 
-    videos = result.items;     
-    videos.forEach((video, index) => {        
-        let videoId = video.id.playlistId;        
-        console.log(videoId);   
+    videos = result.items;
+    videos.forEach((video, index) => {
+        let videoId = video.id.playlistId;
+        console.log(videoId);
         let title = video.snippet.title;
         let description = video.snippet.description;
         let defaultThumbnail = video.snippet.thumbnails.medium.url;
         let channelTitle = video.snippet.channelTitle;
-        
-        let currentPlaylist = new Playlist(videoId,title,description,defaultThumbnail,channelTitle);                
+
+        let currentPlaylist = new Playlist(videoId, title, description, defaultThumbnail, channelTitle);
         let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index);
         outPutDiv.innerHTML += videoCard;
     })
@@ -67,23 +89,23 @@ async function getVideosFromApi(query) {
     outPutDiv.innerHTML = "";
     let queryUrl = URL + query;
     let result = await fetch(queryUrl);
-    result = await result.json(); 
+    result = await result.json();
 
     videos = result.items;
     // console.log(videos);
     videos.forEach((video, index) => {
-        let videoId = video.id.videoId;        
+        let videoId = video.id.videoId;
         let title = video.snippet.title;
         let description = video.snippet.description;
         let defaultThumbnail = video.snippet.thumbnails.medium.url;
         let channelTitle = video.snippet.channelTitle;
 
-        let currentVideo = new Video(videoId,title,description,defaultThumbnail,channelTitle);                
+        let currentVideo = new Video(videoId, title, description, defaultThumbnail, channelTitle);
         let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index)
         outPutDiv.innerHTML += videoCard;
     })
 
-    const playBtns = document.querySelectorAll("img");    
+    const playBtns = document.querySelectorAll("img");
     console.log(playBtns);
     playBtns.forEach(playBtn => {
         playBtn.addEventListener('click', playVideo);
@@ -102,8 +124,8 @@ function playVideo(e) {
     window.location.href = `./videoPlayer.html?videoId=${videoId}&title=${title}&channel=${channelTitle}`;
 }
 
-function gotoplayListVideoPlayer(e){
-    if(e.target.classList.contains('watch-vid')){
+function gotoplayListVideoPlayer(e) {
+    if (e.target.classList.contains('watch-vid')) {
 
         let index = e.target.classList[0];
         let videoObj = videos[index];
@@ -113,12 +135,12 @@ function gotoplayListVideoPlayer(e){
         let channelTitle = snippet.channelTitle;
         window.location.href = `./playlist.html?playlistId=${videoId}&title=${title}&channel=${channelTitle}`;
     }
-}   
+}
 
 function getRadioValue() {
-    for (var i = 0, length = radios.length; i < length; i++) {        
-        if (radios[i].checked) {                                  
-            return radios[i].value;            
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            return radios[i].value;
         }
     }
 }

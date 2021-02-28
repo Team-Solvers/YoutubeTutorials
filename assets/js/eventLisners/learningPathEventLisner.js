@@ -24,8 +24,8 @@ let playlistsGlobal = [];
 console.log(pageType);     
 
 let videoLists = {
-    "web" : ['PL4cUxeGkcC9gQcYgjhBoeQH7wiAyZNrYa',"PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3"],
-    "mobile" : ['PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ'],
+    "web" : ['PL4cUxeGkcC9gQcYgjhBoeQH7wiAyZNrYa',"PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3","UC80PWRj_ZU8Zu0HSMNVwKWw"],
+    "mobile" : ['PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ',"PL4cUxeGkcC9ixPU-QkScoRBVxtPPzVjrQ","PLQkwcJG4YTCTq1raTb5iMuxnEB06J1VHX"],
     "graphics" : [],
     "introduction" : [],
     "blender" : []
@@ -58,7 +58,9 @@ async function updateCards(pageType){
         let result = results[index];        
         let playlistId = playlists[index];
         let active = index == 0 ? "active" : "not-active";          
-        
+        if(result.items.length < 1){
+            continue;
+        }
         let playlistObject = result.items[0].snippet;     
         console.log(playlistObject);
         

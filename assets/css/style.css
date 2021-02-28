@@ -220,3 +220,14 @@ a:hover {
         padding-top: 12em;
     }
 }
+
+h-img .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.search-img .wrapper img {
+    height: 30vh;
+}
