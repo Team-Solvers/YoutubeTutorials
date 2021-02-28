@@ -13,7 +13,8 @@ const searchBtn = document.querySelector(".search-form");
 var radios = document.querySelectorAll('.cat-check');
 
 let videos;
-searchBtn.addEventListener('submit', getSearchResult);
+searchForm.addEventListener('submit', getSearchResult);
+
 
 function getSearchResult(e){
     e.preventDefault();
@@ -82,7 +83,8 @@ async function getVideosFromApi(query) {
         outPutDiv.innerHTML += videoCard;
     })
 
-    const playBtns = document.querySelectorAll(".img");    
+    const playBtns = document.querySelectorAll("img");    
+    console.log(playBtns);
     playBtns.forEach(playBtn => {
         playBtn.addEventListener('click', playVideo);
     })
@@ -90,6 +92,7 @@ async function getVideosFromApi(query) {
 
 
 function playVideo(e) {
+    console.log('cliked');
     let index = e.target.classList[0];
     let videoObj = videos[index];
     let videoId = videoObj.id.videoId;
