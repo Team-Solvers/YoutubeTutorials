@@ -17,8 +17,7 @@ searchBtn.addEventListener('submit', getSearchResult);
 
 function getSearchResult(e){
     e.preventDefault();
-
-    outPutDiv.innerHTML = "";
+    
     let query = queryInput.value;
     if (query === "") {
         queryInput.style.border = "2px solid red";
@@ -28,16 +27,18 @@ function getSearchResult(e){
     queryInput.style.border = "";
     
     let searchType = getRadioValue();    
-    if(searchType == "option2"){
-        //get videos
-    }
-    else {//if(searchType == "option1"){
+    console.log(searchType);
+    if(searchType == "option1"){
         getPlaylistFromApi(query);
+    }
+    else {
+        getVideosFromApi(query);
     }    
 }
 
 async function getPlaylistFromApi(query){    
         
+    outPutDiv.innerHTML = "";
     let queryUrl = PLURL + query;
     let result = await fetch(queryUrl);
     result = await result.json();    
@@ -64,21 +65,11 @@ async function getPlaylistFromApi(query){
 
 }
 
-async function getVideosFromApi(e) {
-    e.preventDefault();
-    let videoType = getRadioValue();        
-    console.log(radios);
-
+async function getVideosFromApi(query) {
     outPutDiv.innerHTML = "";
-    let query = queryInput.value;
-    if (query === "") {
-        queryInput.style.border = "2px solid red";
-        return
-    }
-    queryInput.style.border = "";
     let queryUrl = URL + query;
     let result = await fetch(queryUrl);
-    result = await result.json();
+    result = await result.json(); 
 
     videos = result.items;
     // console.log(videos);
@@ -90,7 +81,7 @@ async function getVideosFromApi(e) {
         let channelTitle = video.snippet.channelTitle;
 
         let currentVideo = new Video(videoId,title,description,defaultThumbnail,channelTitle);                
-        let videoCard = getVideoCard(defaultThumbnail, title, description, videoId, index)
+        let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index)
         outPutDiv.innerHTML += videoCard;
     })
 
