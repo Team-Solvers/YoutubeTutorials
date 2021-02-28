@@ -14,7 +14,7 @@ import {
 const URL = queryURLS.searchVideo;
 const PLURL = queryURLS.searchPlaylist;
 
-const undraw = document.querySelector('.search-img');
+const undraw = document.querySelector('.undraw');
 const container = document.querySelector('.results')
 
 const searchForm = document.querySelector(".search-form");
@@ -23,12 +23,11 @@ const outPutDiv = document.querySelector(".out-put-div");
 const searchBtn = document.querySelector(".search-icon");
 var radios = document.querySelectorAll('.cat-check');
 
-const loader = `
-<div class="spinner-container">
-    <div class="spinner-border" style="width: 7rem; height: 7rem;" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-</div>     `;
+const loader = `<div class="spinner-container wrapper">
+<div class="spinner-border" style="width: 7rem; height: 7rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>  `;
 
 let videos;
 searchForm.addEventListener('submit', getSearchResult);
@@ -37,9 +36,7 @@ searchBtn.addEventListener('click', getSearchResult);
 
 function getSearchResult(e) {
     e.preventDefault();
-    undraw.style.display = "hidden";
-
-
+    
     container.style.display = "block";
     let query = queryInput.value;
     if (query === "") {
@@ -47,7 +44,7 @@ function getSearchResult(e) {
         return
     }
 
-    outPutDiv.innerHTML = loader;
+    undraw.innerHTML = loader;    
     queryInput.style.border = "";
     let searchType = getRadioValue();
     if (searchType == "option1") {
@@ -61,7 +58,8 @@ async function getPlaylistFromApi(query) {
     let queryUrl = PLURL + query;
     let result = await fetch(queryUrl);
     result = await result.json();
-    outPutDiv.innerHTML = "";
+    undraw.innerHTML = "";   
+    outPutDiv.innerHTML = ""
 
     videos = result.items;
     videos.forEach((video, index) => {
@@ -85,11 +83,12 @@ async function getPlaylistFromApi(query) {
 
 }
 
-async function getVideosFromApi(query) {
-    outPutDiv.innerHTML = "";
+async function getVideosFromApi(query) {    
     let queryUrl = URL + query;
     let result = await fetch(queryUrl);
     result = await result.json();
+    undraw.innerHTML = "";   
+    outPutDiv.innerHTML = "";
 
     videos = result.items;
     // console.log(videos);
