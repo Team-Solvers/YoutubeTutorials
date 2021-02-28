@@ -1,6 +1,7 @@
 import {Video} from "../models/video.js"
 import {Playlist} from "../models/playlist.js"
 import {URLS as queryURLS} from "../utils/queries.js"
+import {getVideoCard2} from "../components/videoCard.js"
 
 const URL = queryURLS.searchVideo;
 const PLURL = queryURLS.searchPlaylist;
@@ -12,22 +13,18 @@ const searchBtn = document.querySelector(".search-form");
 var radios = document.querySelectorAll('.cat-check');
 
 let videos;
-
 searchBtn.addEventListener('submit', getSearchResult);
 
 function getSearchResult(e){
     e.preventDefault();
-    
     let query = queryInput.value;
     if (query === "") {
         queryInput.style.border = "2px solid red";
         return
     }
 
-    queryInput.style.border = "";
-    
-    let searchType = getRadioValue();    
-    console.log(searchType);
+    queryInput.style.border = "";    
+    let searchType = getRadioValue();        
     if(searchType == "option1"){
         getPlaylistFromApi(query);
     }
@@ -91,32 +88,6 @@ async function getVideosFromApi(query) {
     })
 }
 
-function getVideoCard(thumbNail, title, description, videoId, index) {
-    return `<div class="card-contain col-md-6 col-sm-6">
-    <div class="card ${index}" style="width: 30rem;">
-    <img class="card-img-top" src="${thumbNail}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">${title}</h5>
-      <p class="card-text">${description}</p>
-      <a href="#" class="${index} btn btn-primary watch-vid">Watch</a>
-    </div></div>
-  </div>`
-}
-
-function getVideoCard2(thumbNail,title,description,videoId,index){
-    return `<div class="col-1"></div>
-    <div class="${index} col-md-3 my-2 watch-vid">
-    <div class="wrapper-card">
-      <img class= "${index} watch-vid"
-        src="${thumbNail}"
-        alt="">
-      <h4 class="ml-2 mt-2">${title}</h4>
-      <div class=" bg-">
-        <p class="ml-3 mb-5 d-inline-block">${description}</p>
-      </div>
-    </div>
-  </div>`
-}
 
 function playVideo(e) {
     let index = e.target.classList[0];
