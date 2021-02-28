@@ -56,7 +56,8 @@ async function getPlaylistFromApi(query){
         outPutDiv.innerHTML += videoCard;
     })
 
-    const playBtns = document.querySelectorAll(".watch-vid");
+    const playBtns = document.querySelectorAll("img");
+    console.log(playBtns);
     playBtns.forEach(playBtn => {
         playBtn.addEventListener('click', gotoplayListVideoPlayer);
     })
@@ -93,14 +94,15 @@ async function getVideosFromApi(e) {
         outPutDiv.innerHTML += videoCard;
     })
 
-    const playBtns = document.querySelectorAll(".watch-vid");
+    const playBtns = document.querySelectorAll(".img");    
     playBtns.forEach(playBtn => {
         playBtn.addEventListener('click', playVideo);
     })
 }
 
 function getVideoCard(thumbNail, title, description, videoId, index) {
-    return `<div class="card-contain col-md-6 col-sm-6"><div class="card" style="width: 30rem;">
+    return `<div class="card-contain col-md-6 col-sm-6">
+    <div class="card ${index}" style="width: 30rem;">
     <img class="card-img-top" src="${thumbNail}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">${title}</h5>
@@ -110,16 +112,16 @@ function getVideoCard(thumbNail, title, description, videoId, index) {
   </div>`
 }
 
-function getVideoCard2(thumbNail,title,description,videoId){
+function getVideoCard2(thumbNail,title,description,videoId,index){
     return `<div class="col-1"></div>
-    <div class="col-md-3 my-2">
+    <div class="${index} col-md-3 my-2 watch-vid">
     <div class="wrapper-card">
-      <img
+      <img class= "${index} watch-vid"
         src="${thumbNail}"
         alt="">
-      <h2 class="ml-2 mt-2" >${title}</h2>
+      <h4 class="ml-2 mt-2">${title}</h4>
       <div class=" bg-">
-        <a href="#" class="ml-3 mb-5 d-inline-block">${description}</a>
+        <p class="ml-3 mb-5 d-inline-block">${description}</p>
       </div>
     </div>
   </div>`
@@ -136,13 +138,16 @@ function playVideo(e) {
 }
 
 function gotoplayListVideoPlayer(e){
-    let index = e.target.classList[0];
-    let videoObj = videos[index];
-    let videoId = videoObj.id.playlistId;
-    let snippet = videoObj.snippet;
-    let title = snippet.title;
-    let channelTitle = snippet.channelTitle;
-    window.location.href = `./playlist.html?playlistId=${videoId}&title=${title}&channel=${channelTitle}`;
+    if(e.target.classList.contains('watch-vid')){
+
+        let index = e.target.classList[0];
+        let videoObj = videos[index];
+        let videoId = videoObj.id.playlistId;
+        let snippet = videoObj.snippet;
+        let title = snippet.title;
+        let channelTitle = snippet.channelTitle;
+        window.location.href = `./playlist.html?playlistId=${videoId}&title=${title}&channel=${channelTitle}`;
+    }
 }   
 
 function getRadioValue() {
