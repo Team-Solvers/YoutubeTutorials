@@ -34,7 +34,7 @@ async function getVideosFromApi(e){
         let channelTitle = video.snippet.channelTitle;
 
         // console.group(defaultThumbnail);
-        let videoCard = getVideoCard(defaultThumbnail,title,description,videoId)
+        let videoCard = getVideoCard2(defaultThumbnail,title,description,videoId)
         outPutDiv.innerHTML += videoCard;
     })
 
@@ -54,6 +54,23 @@ function getVideoCard(thumbNail,title,description,videoId){
     </div></div>
   </div>`
 }
+
+function getVideoCard2(thumbNail,title,description,videoId){
+    return `<div class="col-1"></div>
+    <div class="col-md-3 my-2">
+    <div class="wrapper-card">
+      <img
+        src="${thumbNail}"
+        alt="">
+      <h2 class="ml-2 mt-2">${title}</h2>
+      <div class=" bg-">
+        <a href="#" class="ml-3 mb-5 d-inline-block">${description}</a>
+      </div>
+    </div>
+  </div>`
+}
+
+
 
 function playVideo(e){
     console.log(e.target.classList)

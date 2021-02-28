@@ -8,12 +8,12 @@ const PLURL = queryURLS.searchPlaylist;
 const searchForm = document.querySelector(".search-form");
 const queryInput = document.querySelector(".search-input");
 const outPutDiv = document.querySelector(".out-put-div");
-const searchBtn = document.querySelector(".btn-search");
+const searchBtn = document.querySelector(".search-form");
 var radios = document.querySelectorAll('.cat-check');
 
 let videos;
 
-searchBtn.addEventListener('click', getSearchResult);
+searchBtn.addEventListener('submit', getSearchResult);
 
 function getSearchResult(e){
     e.preventDefault();
@@ -31,7 +31,7 @@ function getSearchResult(e){
     if(searchType == "option2"){
         //get videos
     }
-    else if(searchType == "option1"){
+    else {//if(searchType == "option1"){
         getPlaylistFromApi(query);
     }    
 }
@@ -52,7 +52,7 @@ async function getPlaylistFromApi(query){
         let channelTitle = video.snippet.channelTitle;
         
         let currentPlaylist = new Playlist(videoId,title,description,defaultThumbnail,channelTitle);                
-        let videoCard = getVideoCard(defaultThumbnail, title, description, videoId, index);
+        let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index);
         outPutDiv.innerHTML += videoCard;
     })
 
@@ -107,6 +107,21 @@ function getVideoCard(thumbNail, title, description, videoId, index) {
       <p class="card-text">${description}</p>
       <a href="#" class="${index} btn btn-primary watch-vid">Watch</a>
     </div></div>
+  </div>`
+}
+
+function getVideoCard2(thumbNail,title,description,videoId){
+    return `<div class="col-1"></div>
+    <div class="col-md-3 my-2">
+    <div class="wrapper-card">
+      <img
+        src="${thumbNail}"
+        alt="">
+      <h2 class="ml-2 mt-2" >${title}</h2>
+      <div class=" bg-">
+        <a href="#" class="ml-3 mb-5 d-inline-block">${description}</a>
+      </div>
+    </div>
   </div>`
 }
 
