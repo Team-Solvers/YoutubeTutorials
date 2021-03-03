@@ -1,6 +1,10 @@
+
+body{
+	background-image: linear-gradient(rgba(216, 181, 181, 0.9), rgba(255, 232, 151, 0.9));
+}
 .about{
 	cursor: pointer;
-	background-image: linear-gradient(rgba(216, 181, 181, 0.9), rgba(255, 232, 151, 0.9));
+	
     color: #0c0c0c;
 	padding-top: 20px;
 	padding-bottom: 30px;
@@ -92,6 +96,11 @@
 @keyframes swing {
     0% { transform: rotate(3deg); }
     100% { transform: rotate(-3deg); }
+}
+@media screen and(max-width:700px){
+	.swing img{
+		width: 15rem;
+	}
 }
 .card{
     background-image: linear-gradient(rgba(216, 181, 181, 0.9), rgba(255, 232, 151, 0.9));
