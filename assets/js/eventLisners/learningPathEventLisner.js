@@ -40,7 +40,7 @@ async function updateCards(pageType){
     let startCarousel = getCarousel(pageType);
     let playlists = videoLists[pageType];    
     let results = [];    
-
+    
     for(let index = 0; index < playlists.length; index++){               
         let playlistId = playlists[index];
         let result = await getSinglePlaylistInfo(playlistId);         
@@ -51,6 +51,7 @@ async function updateCards(pageType){
     let slider = document.querySelector(`.carousel-inner`);
     let indicators = document.querySelector(`.carousel-indicators`);
 
+    console.log(results)
     if(results.length == 0){
         return
     }
@@ -58,7 +59,7 @@ async function updateCards(pageType){
         let result = results[index];        
         let playlistId = playlists[index];
         let active = index == 0 ? "active" : "not-active";          
-        if(result.items.length < 1){
+        if(!result.items ||  result.items.length < 1){
             continue;
         }
         let playlistObject = result.items[0].snippet;     

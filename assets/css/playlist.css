@@ -7,13 +7,13 @@
 }
 
 :root {
-    --slide-1: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    --slide-1: url(https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1352&q=80) ;
     --opacity-1: 0.6
 }
 
 body {
     color: black;
-    margin: 3rem;
+    /* margin: 3rem; */
     background-color: rgba(216, 181, 181, 0.9);
     font-family: 'Poppins', sans-serif;
     font-weight: 200;
@@ -65,7 +65,7 @@ body {
     height: 100%;
     width: 100%;
     border-radius: 10px;
-    background-image: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    background-image: var(--slide-1);
     background-size: cover;
 }
 

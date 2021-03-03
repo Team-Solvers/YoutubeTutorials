@@ -29,22 +29,23 @@ const loader = `<div class="spinner-container wrapper">
   </div>
 </div>  `;
 
-let videos;
+let videos =[];
 searchForm.addEventListener('submit', getSearchResult);
 searchBtn.addEventListener('click', getSearchResult);
 
 
 function getSearchResult(e) {
     e.preventDefault();
-    
+
     container.style.display = "block";
     let query = queryInput.value;
     if (query === "") {
         queryInput.style.border = "2px solid red";
         return
     }
-
-    undraw.innerHTML = loader;    
+    
+    undraw.innerHTML = loader;
+    
     queryInput.style.border = "";
     let searchType = getRadioValue();
     if (searchType == "option1") {
@@ -55,21 +56,26 @@ function getSearchResult(e) {
 }
 
 async function getPlaylistFromApi(query) {
-    let queryUrl = PLURL + query;
-    let result = await fetch(queryUrl);
-    result = await result.json();
-    undraw.innerHTML = "";   
+    let queryUrl = PLURL + query ;    
+    try {
+        let result = await fetch(queryUrl);
+        result = await result.json();   
+        videos = result.items;
+    } catch (error) {
+        console.log("couldn't load data")        
+    }    
+    undraw.innerHTML = "";
     outPutDiv.innerHTML = ""
-
-    videos = result.items;
+    
     videos.forEach((video, index) => {
         let videoId = video.id.playlistId;
         console.log(videoId);
         let title = video.snippet.title;
         let description = video.snippet.description;
+
         let defaultThumbnail = video.snippet.thumbnails.medium.url;
         let channelTitle = video.snippet.channelTitle;
-
+        description = (description.length > 35) ? `${description.slice(0, 35)}...` : description
         let currentPlaylist = new Playlist(videoId, title, description, defaultThumbnail, channelTitle);
         let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index);
         outPutDiv.innerHTML += videoCard;
@@ -83,11 +89,17 @@ async function getPlaylistFromApi(query) {
 
 }
 
-async function getVideosFromApi(query) {    
+async function getVideosFromApi(query) {
     let queryUrl = URL + query;
-    let result = await fetch(queryUrl);
-    result = await result.json();
-    undraw.innerHTML = "";   
+    let result = [];
+    try {
+        result = await fetch(queryUrl);
+        result = await result.json();   
+        videos = result.items;
+    } catch (error) {
+        console.log("couldn't load data")        
+    }   
+    undraw.innerHTML = "";
     outPutDiv.innerHTML = "";
 
     videos = result.items;
@@ -99,6 +111,7 @@ async function getVideosFromApi(query) {
         let defaultThumbnail = video.snippet.thumbnails.medium.url;
         let channelTitle = video.snippet.channelTitle;
 
+        description = (description.length > 35) ? `${description.slice(0, 35)}...` : description
         let currentVideo = new Video(videoId, title, description, defaultThumbnail, channelTitle);
         let videoCard = getVideoCard2(defaultThumbnail, title, description, videoId, index)
         outPutDiv.innerHTML += videoCard;
