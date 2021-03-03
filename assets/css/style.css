@@ -243,4 +243,66 @@ a {
 	color: #222222
   }
   
- 
+  /* Dropdown */
+  
+  .dropdown {
+	float: right;
+    margin-top: -153px;
+    margin-right: 200px;
+  }
+  .dd-input {
+	display: none;
+  }
+  
+  .dd-menu {
+	position: absolute;
+	top: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0;
+	margin: 2px 0 0 0;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+	box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: rgb(219, 216, 216);
+	list-style-type: none;
+  }
+  
+  .dd-input + .dd-menu {
+	display: none;
+  } 
+  
+  .dd-input:checked + .dd-menu {
+	display: block;
+  } 
+  
+  .dd-menu li {
+	padding: 10px 20px;
+	cursor: pointer;
+	white-space: nowrap;
+  }
+  
+  .dd-menu li:hover {
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+	background-color: linear-gradient(rgba(141, 87, 87, 0.9), rgba(255, 232, 151, 0.9));
+  }
+  
+  .dd-menu li a {
+	display: block;
+	margin: -10px -20px;
+	padding: 10px 20px;
+  }
+  
+  .dd-menu li.divider{
+	padding: 0;
+	border-bottom: 2px solid #cccccc;
+  }
+  .btn{
+       box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: linear-gradient(rgba(141, 87, 87, 0.9), rgba(24, 23, 22, 0.9));
+    border: 1px red solid;
+    border-radius: 100px;
+  }
+  .history{
+    margin-top: 50px;
+    font-size: 2rem;
+  }
