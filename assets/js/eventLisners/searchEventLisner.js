@@ -11,8 +11,14 @@ import {
     getVideoCard2
 } from "../components/videoCard.js"
 
+import {getHistory, addHistory,removeHistory} from "../local.js"
+
 const URL = queryURLS.searchVideo;
 const PLURL = queryURLS.searchPlaylist;
+
+const historyBtn = document.querySelector(".history")
+const clear = document.querySelector(".clear");
+const dropdown = document.querySelector(".li-wrap");
 
 const undraw = document.querySelector('.undraw');
 const container = document.querySelector('.results')
@@ -32,7 +38,23 @@ const loader = `<div class="spinner-container wrapper">
 let videos =[];
 searchForm.addEventListener('submit', getSearchResult);
 searchBtn.addEventListener('click', getSearchResult);
+clear.addEventListener('click',clearHistory)
 
+loadHistory();
+
+function loadHistory(){    
+    dropdown.innerHTML = "";
+    let history = getHistory();    
+    console.log('added',history);
+    for(let h of history){
+        dropdown.innerHTML = `<li>${h}</li>` + dropdown.innerHTML;
+    }    
+}
+
+function clearHistory(){
+    removeHistory();
+    loadHistory();
+}
 
 function getSearchResult(e) {
     e.preventDefault();
@@ -44,6 +66,8 @@ function getSearchResult(e) {
         return
     }
     
+    addHistory(query)
+    loadHistory();
     undraw.innerHTML = loader;
     
     queryInput.style.border = "";
@@ -69,7 +93,7 @@ async function getPlaylistFromApi(query) {
     
     videos.forEach((video, index) => {
         let videoId = video.id.playlistId;
-        console.log(videoId);
+        // console.log(videoId);
         let title = video.snippet.title;
         let description = video.snippet.description;
 
@@ -82,7 +106,7 @@ async function getPlaylistFromApi(query) {
     })
 
     const playBtns = document.querySelectorAll("img");
-    console.log(playBtns);
+    // console.log(playBtns);
     playBtns.forEach(playBtn => {
         playBtn.addEventListener('click', gotoplayListVideoPlayer);
     })
