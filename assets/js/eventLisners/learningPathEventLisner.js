@@ -21,14 +21,13 @@ let body = document.querySelector('.container');
 const urlParams = new URLSearchParams(window.location.search);
 let pageType = urlParams.get('t'); 
 let playlistsGlobal = [];
-console.log(pageType);     
+// console.log(pageType);     
 
 let videoLists = {
     "web" : ['PL4cUxeGkcC9gQcYgjhBoeQH7wiAyZNrYa',"PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3","UC80PWRj_ZU8Zu0HSMNVwKWw"],
     "mobile" : ['PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ',"PL4cUxeGkcC9ixPU-QkScoRBVxtPPzVjrQ","PLQkwcJG4YTCTq1raTb5iMuxnEB06J1VHX"],
-    "graphics" : [],
-    "introduction" : [],
-    "blender" : []
+    "tensor" : ["PLhhyoLH6IjfxVOdVC1P1L5z5azs0XjMsb"],
+    "game" : ["PLPV2KyIb3jR5QFsefuO2RlAgWEz6EvVi6","PLL0cLF8gjBpqDdMoeid6Vl5roMl6xJQGC"],    
 }
 
 
