@@ -246,10 +246,11 @@ a {
   /* Dropdown */
   
   .dropdown {
-	float: right;
-    margin-top: -153px;
-    margin-right: 200px;
+      position: fixed;
+      margin-top: -11.5%;
+      left: 10%;
   }
+
   .dd-input {
 	display: none;
   }
