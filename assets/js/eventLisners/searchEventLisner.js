@@ -18,7 +18,7 @@ const PLURL = queryURLS.searchPlaylist;
 
 const historyBtn = document.querySelector(".history")
 const clear = document.querySelector(".clear");
-const dropdown = document.querySelector(".li-wrap");
+const dropdown = document.querySelector(".drop-wrapper");
 
 const undraw = document.querySelector('.undraw');
 const container = document.querySelector('.results')
@@ -45,9 +45,8 @@ loadHistory();
 function loadHistory(){    
     dropdown.innerHTML = "";
     let history = getHistory();    
-    console.log('added',history);
     for(let h of history){
-        dropdown.innerHTML = `<li>${h}</li>` + dropdown.innerHTML;
+        dropdown.innerHTML = `<a class="dropdown-item" href="#">${h}</a>` + dropdown.innerHTML;
     }    
 }
 
