@@ -254,9 +254,13 @@ a {
   .dd-input {
 	display: none;
   }
+
+  .watch-vid{
+      z-index: 0;
+  }
   
   .dd-menu {
-    z-index: 10;
+    z-index: 2;
 	position: absolute;
 	top: 100%;
 	border: 1px solid #ccc;
